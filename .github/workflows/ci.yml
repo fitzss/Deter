@@ -27,6 +27,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
       - name: Type-check
         run: npm run typecheck
 
@@ -35,3 +38,10 @@ jobs:
 
       - name: Build production bundle
         run: npm run build
+
+      - name: Preserve generated lockfile
+        uses: actions/upload-artifact@v4
+        with:
+          name: halo-lab-package-lock
+          path: package-lock.json
+          retention-days: 1

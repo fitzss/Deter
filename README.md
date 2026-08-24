@@ -1,46 +1,101 @@
-# Deter · HALO Lab
+# Deter · HALO V0 Hardware Program
 
-HALO Lab is the Phase 0 software foundation for Deter: a local-first simulator and evidence workspace for testing whether a user-triggered, non-contact intervention can create a measurable disengagement window before physical contact.
+This repository is the working system for taking Deter from concept through hardware procurement, assembly, software and firmware, controlled flight, cue integration, measurement, and iteration.
 
-It is **not** a flight controller, autonomous threat detector, weapon, or validated personal-protection product.
+The current objective is **not** to claim a finished personal-protection product. It is to build and characterize a guarded reference aircraft that can answer whether a user-triggered flying cue justifies the complexity of flight.
 
-## Why this is the first build
+## Start here in Codex
 
-Deter's most valuable hypothesis is not simply that a small drone can fly. It is that an elevated, visible witness may alter a staged approach enough to create additional time and distance for disengagement.
+Select repository `fitzss/Deter` and branch:
 
-Before custom hardware, HALO Lab must make that claim falsifiable by comparing:
+```text
+codex/halo-hardware-program
+```
 
-- no intervention;
-- an on-body alarm;
-- light plus a recording warning;
-- an elevated stationary witness; and
-- a simulated flying unit.
+Then ask Codex to execute:
 
-## Current capabilities
+```text
+docs/CODEX_TASK_H0.md
+```
 
-- Operator-controlled trial state machine.
-- Explicit consent gate for staged tests.
-- Append-only event timeline.
-- Separate human observation fields.
-- Automatic activation-latency calculation.
-- Local browser persistence.
-- Versioned JSON export.
-- Summary metrics across resolved trials.
-- Unit tests for valid and invalid state transitions.
-- Reproducible dependency lockfile and read-only CI security gate.
+Codex must read `AGENTS.md` first. The first task closes the reference-platform decision, verifies live component facts and compatibility, and creates a founder-ready Gate 1 order sheet. Codex does not place the order or claim physical verification.
 
-## Run locally
+## Current program state
 
-Requirements: Node.js `^20.19.0` or `>=22.12.0`.
+- Historical Deter/HALO product framing is preserved.
+- HALO Lab exists as a local evidence and experiment application.
+- The hardware program has explicit gates from requirements through a custom-platform decision.
+- A provisional Crazyflie 2.1 Brushless reference-platform cart has been prepared.
+- The official-store component subtotal is currently estimated at $643.50 before shipping and tax.
+- No hardware order or physical result is yet recorded.
+
+## Immediate files
+
+```text
+AGENTS.md                         Codex's hardware-program instructions and boundaries
+docs/CODEX_HANDOFF.md             Complete project context and working model
+docs/CODEX_TASK_H0.md             First Codex procurement/architecture task
+docs/HARDWARE_ROADMAP.md          Evidence gates and stop conditions
+docs/PROCUREMENT_PLAN.md          Proposed first cart, deferred items, and rationale
+docs/BUILD_TEST_PROTOCOL.md       Receipt, bench, hover, cue, and latency protocol
+decisions/ADR-001-reference-platform.md
+                                  Provisional platform decision and reversal conditions
+hardware/bom.csv                  Candidate and proposed parts
+hardware/weight_power_budget.csv  Published, estimated, and future measured budgets
+hardware/inventory.csv            Only actual orders and received parts
+logs/                             Battery, fault, build, and test evidence
+templates/                        Build and test record templates
+```
+
+## Hardware strategy
+
+The provisional first platform is the Crazyflie 2.1 Brushless ecosystem because it offers guarded low-energy flight, open firmware and host control, Python telemetry, expansion decks, a published 40 g recommended payload, and a roughly 10-minute stock flight time.
+
+The planned Gate 1 configuration adds:
+
+- Flow deck v2 for position-aided indoor hover;
+- top-mounted Color LED deck for a visible cue;
+- Buzzer deck for a short audible cue;
+- Prototyping deck for later lightweight circuits;
+- spare batteries, propellers, and guards.
+
+This is a development mule, not the final HALO form factor.
+
+## Program gates
+
+```text
+G0 requirements and reference-platform decision
+G1 staged procurement and receipt
+G2 propellers-off bench bring-up
+G3 guarded controlled hover
+G4 visible and audible cue integration
+G5 command latency and reliability characterization
+G6 consented staged mechanism comparison
+G7 custom HALO decision
+```
+
+Do not skip gates. A document does not prove a physical result.
+
+## Founder/Codex division of labor
+
+Codex researches, compares, writes code, maintains the BOM and budgets, creates instructions, analyzes logs, and updates the repository.
+
+The founder approves money, places orders, inspects and assembles parts, handles batteries, performs physical tests, and supplies measurements, photos, logs, and failures.
+
+Codex must mark physical results **unverified** until that evidence exists.
+
+## HALO Lab software
+
+The existing React/TypeScript application remains useful for recording consented staged trials and preserving event timing and observations.
+
+Run it locally with Node.js `^20.19.0` or `>=22.12.0`:
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Then open the local address printed by Vite.
-
-## Verify the project
+Verify software changes with:
 
 ```bash
 npm audit --audit-level=high
@@ -49,39 +104,12 @@ npm test
 npm run build
 ```
 
-## Repository map
+## Boundaries
 
-```text
-AGENTS.md                    Codex and contributor operating constraints
-Deterslide1.md               Historical pitch material; claims are not validated
-package-lock.json            Exact reproducible dependency graph
-src/domain.ts                Trial types, conditions, events, and factories
-src/simulator.ts             Fail-closed state machine and derived metrics
-src/simulator.test.ts        State-machine tests
-src/storage.ts               Local persistence and versioned JSON export
-src/App.tsx                  Operator and evidence interface
-src/styles.css               Responsive visual system
-docs/PHASE_0_PRODUCT_CONTRACT.md
-                             Product question, metrics, exclusions, and gates
-docs/CODEX_TASK_01.md        First hardening task to run in Codex
-```
+This program does not include autonomous threat classification, facial recognition, person targeting, pursuit, harmful or contact payloads, lasers, deliberately disorienting cues, public surprise testing, or claims of proven safety or deterrence.
 
-## Phase 0 state model
+Human-involved trials must be explicitly consented and staged. Early flight work should be indoors or in another legally authorized controlled area, with prop guards, a clear flight volume, and an independent stop observer once propellers are installed.
 
-```text
-idle → armed → active → resolved
-           ↘ aborted
-idle/armed/active → fault
-```
+## Current decision
 
-Invalid transitions fail closed. A control trial records its trigger marker but does not create simulated recording or warning events.
-
-## Data boundary
-
-Trial data remains in the browser unless the operator exports it. Phase 0 makes no external API calls and has no authentication or cloud database.
-
-All tests must be synthetic or explicitly consented and staged. Notes should record observable actions and uncertainty rather than infer intent.
-
-## Next decision
-
-Do not connect hardware merely because the dashboard works. First use HALO Lab to determine whether the flying or elevated condition adds meaningful separation over simpler interventions. Hardware earns its place only if the comparison data supports it.
+The next useful work is not another pitch deck and not a custom airframe. It is to complete `docs/CODEX_TASK_H0.md`, approve the smallest defensible Gate 1 cart, place the order, and then turn every physical result into repository evidence.

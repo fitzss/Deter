@@ -1,9 +1,10 @@
-name: HALO Lab CI
+name: HALO Program CI
 
 on:
   push:
     branches:
       - codex/halo-lab-foundation
+      - codex/halo-hardware-program
   pull_request:
     branches:
       - main
@@ -39,3 +40,6 @@ jobs:
 
       - name: Build production bundle
         run: npm run build
+
+      - name: Validate hardware ledgers
+        run: python3 scripts/validate_hardware_data.py

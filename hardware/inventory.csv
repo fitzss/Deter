@@ -1,0 +1,1 @@
+inventory_id,item_id,manufacturer,part_name,sku,status,quantity_ordered,quantity_received,order_date,received_date,supplier,unit_price_usd,shipping_tax_usd,order_number,serial_or_lot,condition,storage_location,return_deadline,notes

@@ -1,0 +1,1 @@
+fault_id,timestamp_utc,gate,run_id,configuration,observed_event,immediate_action,physical_damage,thermal_or_battery_concern,telemetry_or_log_path,probable_cause,confidence,corrective_action,retest_required,status,closed_timestamp_utc,notes

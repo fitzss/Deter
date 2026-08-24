@@ -27,13 +27,14 @@ Before custom hardware, HALO Lab must make that claim falsifiable by comparing:
 - Versioned JSON export.
 - Summary metrics across resolved trials.
 - Unit tests for valid and invalid state transitions.
+- Reproducible dependency lockfile and read-only CI security gate.
 
 ## Run locally
 
-Requirements: Node.js 18.18 or newer.
+Requirements: Node.js `^20.19.0` or `>=22.12.0`.
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -42,6 +43,7 @@ Then open the local address printed by Vite.
 ## Verify the project
 
 ```bash
+npm audit --audit-level=high
 npm run typecheck
 npm test
 npm run build
@@ -52,6 +54,7 @@ npm run build
 ```text
 AGENTS.md                    Codex and contributor operating constraints
 Deterslide1.md               Historical pitch material; claims are not validated
+package-lock.json            Exact reproducible dependency graph
 src/domain.ts                Trial types, conditions, events, and factories
 src/simulator.ts             Fail-closed state machine and derived metrics
 src/simulator.test.ts        State-machine tests
@@ -60,7 +63,7 @@ src/App.tsx                  Operator and evidence interface
 src/styles.css               Responsive visual system
 docs/PHASE_0_PRODUCT_CONTRACT.md
                              Product question, metrics, exclusions, and gates
-docs/CODEX_TASK_01.md        First task to run in Codex
+docs/CODEX_TASK_01.md        First hardening task to run in Codex
 ```
 
 ## Phase 0 state model
